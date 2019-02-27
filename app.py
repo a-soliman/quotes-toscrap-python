@@ -1,7 +1,10 @@
 import requests
-from bs4 import BeautifulSoup
 
-page = requests.get("http://quotes.toscrape.com/")
-soup = BeautifulSoup(page.content, "html.parser")
+from pages.quotes_page import QuotesPage
 
-print(soup)
+page_content = requests.get("http://quotes.toscrape.com/").content
+page = QuotesPage(page_content)
+
+for quote in page.quotes:
+    print(quote)
+    print("-"*10)
